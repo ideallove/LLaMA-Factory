@@ -38,6 +38,8 @@ examples/
     │   └── sft.sh: Fine-tune model with BAdam
     ├── loraplus/
     │   └── sft.sh: Fine-tune model using LoRA+
+    ├── mod/
+    │   └── sft.sh: Fine-tune model using Mixture-of-Depths
     ├── llama_pro/
     │   ├── expand.sh: Expand layers in the model
     │   └── sft.sh: Fine-tune the expanded model
