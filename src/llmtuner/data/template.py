@@ -650,6 +650,14 @@ _register_template(
 
 
 _register_template(
+    name="self_rog_llama2",
+    format_user=StringFormatter(slots=[{"bos_token"}, "[INST] <<SYS>>\n<</SYS>>\n{{content}} [/INST]"]),
+    # format_user=StringFormatter(slots=[{"bos_token"}, "[INST] {{content}} [/INST]"]),
+    # format_system=StringFormatter(slots=["<<SYS>>\n{{content}}\n<</SYS>>\n\n"]),
+)
+
+
+_register_template(
     name="llama2_zh",
     format_user=StringFormatter(slots=[{"bos_token"}, "[INST] {{content}} [/INST]"]),
     format_system=StringFormatter(slots=["<<SYS>>\n{{content}}\n<</SYS>>\n\n"]),

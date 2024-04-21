@@ -1,4 +1,15 @@
 {
+  "rog_train_all_shuffled": {
+    "file_name": "/home/dyf/lx-project/datasets/rog_train_shuffled.json",
+    "formatting": "alpaca",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system",
+      "history": "history"
+    }
+  },
   "alpaca_en": {
     "file_name": "alpaca_data_en_52k.json",
     "file_sha1": "607f94a7f581341e59685aef32f531095232cf23"
