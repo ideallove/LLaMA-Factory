@@ -68,6 +68,8 @@ Compared to ChatGLM's [P-Tuning](https://github.com/THUDM/ChatGLM2-6B/tree/main/
 
 ## Changelog
 
+[24/04/22] We provided a **[Colab notebook](https://colab.research.google.com/drive/1eRTPn37ltBbYsISy9Aw2NuI2Aq5CQrD9?usp=sharing)** for fine-tuning the Llama-3 model on a free T4 GPU. Two Llama-3-derived models fine-tuned using LLaMA Factory are available at Hugging Face, check [Llama3-8B-Chinese-Chat](https://huggingface.co/shenzhi-wang/Llama3-8B-Chinese-Chat) and [Llama3-Chinese](https://huggingface.co/zhichen/Llama3-Chinese) for details.
+
 [24/04/21] We supported **[Mixture-of-Depths](https://arxiv.org/abs/2404.02258)** according to [AstraMindAI's implementation](https://github.com/astramind-ai/Mixture-of-depths). See `examples/extras/mod` for usage.
 
 [24/04/19] We supported **Meta Llama 3** model series.
@@ -159,9 +161,11 @@ Compared to ChatGLM's [P-Tuning](https://github.com/THUDM/ChatGLM2-6B/tree/main/
 | [Yuan](https://huggingface.co/IEITYuan)                  | 2B/51B/102B                 | q_proj,v_proj     | yuan      |
 
 > [!NOTE]
-> **Default module** is used for the `--lora_target` argument, you can use `--lora_target all` to specify all the available modules.
+> **Default module** is used for the `--lora_target` argument, you can use `--lora_target all` to specify all the available modules for better convergence.
 >
-> For the "base" models, the `--template` argument can be chosen from `default`, `alpaca`, `vicuna` etc. But make sure to use the **corresponding template** for the "chat" models.
+> For the "base" models, the `--template` argument can be chosen from `default`, `alpaca`, `vicuna` etc. But make sure to use the **corresponding template** for the "instruct/chat" models.
+>
+> Remember to use the **SAME** template in training and inference.
 
 Please refer to [constants.py](src/llmtuner/extras/constants.py) for a full list of models we supported.
 
@@ -329,7 +333,7 @@ To enable FlashAttention-2 on the Windows platform, you need to install the prec
 
 </details>
 
-### LLaMA Board GUI
+### Train with LLaMA Board GUI
 
 > [!IMPORTANT]
 > LLaMA Board GUI only supports training on a single GPU, please use [CLI](#command-line-interface) for distributed training.
@@ -341,6 +345,16 @@ export CUDA_VISIBLE_DEVICES=0 # `set CUDA_VISIBLE_DEVICES=0` for Windows
 export GRADIO_SERVER_PORT=7860 # `set GRADIO_SERVER_PORT=7860` for Windows
 python src/train_web.py # or python -m llmtuner.webui.interface
 ```
+
+<details><summary>For Alibaba Cloud users</summary>
+
+If you encountered display problems in LLaMA Board on Alibaba Cloud, try using the following command to set environment variables before starting LLaMA Board:
+
+```bash
+export GRADIO_ROOT_PATH=/${JUPYTER_NAME}/proxy/7860/
+```
+
+</details>
 
 #### Use Docker
 
@@ -371,7 +385,7 @@ docker compose -f ./docker-compose.yml up -d
 
 </details>
 
-### Command Line Interface
+### Train with Command Line Interface
 
 See [examples/README.md](examples/README.md) for usage.
 
@@ -381,13 +395,13 @@ Use `python src/train_bash.py -h` to display arguments description.
 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 API_PORT=8000 python src/api_demo.py \
-    --model_name_or_path mistralai/Mistral-7B-Instruct-v0.2 \
-    --template mistral \
+    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
+    --template llama3 \
     --infer_backend vllm \
     --vllm_enforce_eager
 ```
 
-### Use ModelScope Hub
+### Download from ModelScope Hub
 
 If you have trouble with downloading models and datasets from Hugging Face, you can use ModelScope.
 
@@ -395,7 +409,7 @@ If you have trouble with downloading models and datasets from Hugging Face, you 
 export USE_MODELSCOPE_HUB=1 # `set USE_MODELSCOPE_HUB=1` for Windows
 ```
 
-Train the model by specifying a model ID of the ModelScope Hub as the `--model_name_or_path`. You can find a full list of model IDs at [ModelScope Hub](https://modelscope.cn/models), e.g., `modelscope/Llama-2-7b-ms`.
+Train the model by specifying a model ID of the ModelScope Hub as the `--model_name_or_path`. You can find a full list of model IDs at [ModelScope Hub](https://modelscope.cn/models), e.g., `LLM-Research/Meta-Llama-3-8B-Instruct`.
 
 ## Projects using LLaMA Factory
 

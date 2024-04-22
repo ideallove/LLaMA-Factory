@@ -11,7 +11,7 @@
 [![Twitter](https://img.shields.io/twitter/follow/llamafactory_ai)](https://twitter.com/llamafactory_ai)
 [![Spaces](https://img.shields.io/badge/🤗-Open%20in%20Spaces-blue)](https://huggingface.co/spaces/hiyouga/LLaMA-Board)
 [![Studios](https://img.shields.io/badge/ModelScope-Open%20in%20Studios-blue)](https://modelscope.cn/studios/hiyouga/LLaMA-Board)
-[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1eRTPn37ltBbYsISy9Aw2NuI2Aq5CQrD9?usp=sharing)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1d5KQtbemerlSDSxZIfAaWXhKr30QypiK?usp=sharing)
 
 👋 加入我们的[微信群](assets/wechat.jpg)。
 
@@ -23,7 +23,7 @@ https://github.com/hiyouga/LLaMA-Factory/assets/16256802/ec36a9dd-37f4-4f72-81bd
 
 选择你的打开方式：
 
-- **Colab**：https://colab.research.google.com/drive/1eRTPn37ltBbYsISy9Aw2NuI2Aq5CQrD9?usp=sharing
+- **Colab**：https://colab.research.google.com/drive/1d5KQtbemerlSDSxZIfAaWXhKr30QypiK?usp=sharing
 - **本地机器**：请见[如何使用](#如何使用)
 
 ## 目录
@@ -67,6 +67,8 @@ https://github.com/hiyouga/LLaMA-Factory/assets/16256802/ec36a9dd-37f4-4f72-81bd
 </details>
 
 ## 更新日志
+
+[24/04/22] 我们提供了在免费 T4 GPU 上微调 Llama-3 模型的 **[Colab 笔记本](https://colab.research.google.com/drive/1d5KQtbemerlSDSxZIfAaWXhKr30QypiK?usp=sharing)**。Hugging Face 社区公开了两个利用 LLaMA Factory 微调的 Llama-3 模型，详情请见 [Llama3-8B-Chinese-Chat](https://huggingface.co/shenzhi-wang/Llama3-8B-Chinese-Chat) 和 [Llama3-Chinese](https://huggingface.co/zhichen/Llama3-Chinese)。
 
 [24/04/21] 我们基于 [AstraMindAI 的仓库](https://github.com/astramind-ai/Mixture-of-depths)支持了 **[混合深度训练](https://arxiv.org/abs/2404.02258)**。详细用法请参照 `examples/extras/mod`。
 
@@ -159,9 +161,11 @@ https://github.com/hiyouga/LLaMA-Factory/assets/16256802/ec36a9dd-37f4-4f72-81bd
 | [Yuan](https://huggingface.co/IEITYuan)                  | 2B/51B/102B                 | q_proj,v_proj     | yuan      |
 
 > [!NOTE]
-> **默认模块**应作为 `--lora_target` 参数的默认值，可使用 `--lora_target all` 参数指定全部模块。
+> **默认模块**应作为 `--lora_target` 参数的默认值，可使用 `--lora_target all` 参数指定全部模块以得到更好的效果。
 >
-> 对于所有“基座”（Base）模型，`--template` 参数可以是 `default`, `alpaca`, `vicuna` 等任意值。但“对话”（Chat）模型请务必使用**对应的模板**。
+> 对于所有“基座”（Base）模型，`--template` 参数可以是 `default`, `alpaca`, `vicuna` 等任意值。但“对话”（Instruct/Chat）模型请务必使用**对应的模板**。
+>
+> 请务必在训练和推理时使用**完全一致**的模板。
 
 项目所支持模型的完整列表请参阅 [constants.py](src/llmtuner/extras/constants.py)。
 
@@ -329,10 +333,10 @@ pip install https://github.com/jllllll/bitsandbytes-windows-webui/releases/downl
 
 </details>
 
-### LLaMA Board 可视化界面
+### 利用 LLaMA Board 可视化界面训练
 
 > [!IMPORTANT]
-> LLaMA Board 可视化界面目前仅支持单 GPU 训练，请使用[命令行接口](#命令行接口)来进行分布式训练。
+> LLaMA Board 可视化界面目前仅支持单 GPU 训练，请使用[命令行接口](#命令行接口)来进行多 GPU 分布式训练。
 
 #### 使用本地环境
 
@@ -341,6 +345,16 @@ export CUDA_VISIBLE_DEVICES=0 # Windows 使用 `set CUDA_VISIBLE_DEVICES=0`
 export GRADIO_SERVER_PORT=7860 # Windows 使用 `set GRADIO_SERVER_PORT=7860`
 python src/train_web.py # 或 python -m llmtuner.webui.interface
 ```
+
+<details><summary>阿里云用户指南</summary>
+
+如果您在阿里云上使用 LLaMA Board 时遇到显示问题，请尝试在启动前使用以下命令设置环境变量：
+
+```bash
+export GRADIO_ROOT_PATH=/${JUPYTER_NAME}/proxy/7860/
+```
+
+</details>
 
 #### 使用 Docker
 
@@ -371,23 +385,23 @@ docker compose -f ./docker-compose.yml up -d
 
 </details>
 
-### 命令行接口
+### 利用命令行接口训练
 
 使用方法请参考 [examples/README_zh.md](examples/README_zh.md)。
 
-使用 `python src/train_bash.py -h` 查看参数文档。
+您可以执行 `python src/train_bash.py -h` 来查看参数文档。
 
-### 使用 OpenAI 风格 API 和 vLLM 部署
+### 利用 vLLM 部署 OpenAI API
 
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 API_PORT=8000 python src/api_demo.py \
-    --model_name_or_path mistralai/Mistral-7B-Instruct-v0.2 \
-    --template mistral \
+    --model_name_or_path meta-llama/Meta-Llama-3-8B-Instruct \
+    --template llama3 \
     --infer_backend vllm \
     --vllm_enforce_eager
 ```
 
-### 使用魔搭社区
+### 从魔搭社区下载
 
 如果您在 Hugging Face 模型和数据集的下载中遇到了问题，可以通过下述方法使用魔搭社区。
 
@@ -395,7 +409,7 @@ CUDA_VISIBLE_DEVICES=0,1 API_PORT=8000 python src/api_demo.py \
 export USE_MODELSCOPE_HUB=1 # Windows 使用 `set USE_MODELSCOPE_HUB=1`
 ```
 
-将 `--model_name_or_path` 设置为模型 ID 来加载对应的模型。在[魔搭社区](https://modelscope.cn/models)查看所有可用的模型，例如 `modelscope/Llama-2-7b-ms`。
+将 `--model_name_or_path` 设置为模型 ID 来加载对应的模型。在[魔搭社区](https://modelscope.cn/models)查看所有可用的模型，例如 `LLM-Research/Meta-Llama-3-8B-Instruct`。
 
 ## 使用了 LLaMA Factory 的项目
 
