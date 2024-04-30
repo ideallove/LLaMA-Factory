@@ -1,6 +1,6 @@
 {
   "rog_train_all_shuffled": {
-    "file_name": "/home/dyf/lx-project/datasets/rog_train_shuffled.json",
+    "file_name": "/home/datasets/rog_train_shuffled.json",
     "formatting": "alpaca",
     "columns": {
       "prompt": "instruction",
