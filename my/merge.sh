@@ -1,0 +1,12 @@
+CUDA_VISIBLE_DEVICES=0 llamafactory-cli export \
+    --model_name_or_path /home/dyf/model/Phi-3-mini-128k-instruct-modified \
+    --adapter_name_or_path /home/finetune/phi_rog_240505_05 \
+    --template phi_self \
+    --finetuning_type lora \
+    --export_dir /home/dyf/model/rog_240505_phi \
+    --export_size 10 \
+    --export_device cuda \
+    --export_legacy_format False \
+    --resize_vocab True \
+    --split_special_tokens True \
+    --use_fast_tokenizer False

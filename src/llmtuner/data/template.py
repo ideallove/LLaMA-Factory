@@ -689,7 +689,7 @@ _register_template(
 
 
 _register_template(
-    name="self_rog_llama2",
+    name="llama2_self",
     format_user=StringFormatter(slots=[{"bos_token"}, "[INST] {{content}} [/INST]"]),
     format_system=StringFormatter(slots=["<<SYS>>\n{{content}}<</SYS>>\n"]),
 )
