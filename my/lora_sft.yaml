@@ -12,7 +12,7 @@ lora_rank: 8
 lora_alpha: 16
 lora_dropout: 0.05
 packing: false
-upcast_layernorm: true
+upcast_layernorm: false
 
 # train
 max_grad_norm: 1.0
