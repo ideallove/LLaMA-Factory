@@ -1,5 +1,5 @@
-# nohup ./my/train.sh > mylog_240509.log 2>&1 &
-DATE=240509
+# nohup ./my/train.sh > mylog_240512.log 2>&1 &
+DATE=240512
 CUDA_VISIBLE_DEVICES=0 llamafactory-cli train \
     --stage sft \
     --do_train \
@@ -13,12 +13,12 @@ CUDA_VISIBLE_DEVICES=0 llamafactory-cli train \
     --output_dir /home/finetune/rog_${DATE} \
     --dataset_dir data \
     --dataset rog_train_all_shuffled \
-    --cutoff_len 2048 \
+    --cutoff_len 4096 \
     --preprocessing_num_workers 1 \
     --num_train_epochs 3.0 \
-    --max_samples 118000 \
-    --per_device_train_batch_size 3 \
-    --gradient_accumulation_steps 6 \
+    --max_samples 130000 \
+    --per_device_train_batch_size 2 \
+    --gradient_accumulation_steps 8 \
     --lr_scheduler_type cosine \
     --max_grad_norm 1.0 \
     --logging_steps 10 \
@@ -36,6 +36,7 @@ CUDA_VISIBLE_DEVICES=0 llamafactory-cli train \
     --resize_vocab True \
     --split_special_tokens True \
     --use_cache False
+#    --packing True
 
 #    --upcast_layernorm True
 
