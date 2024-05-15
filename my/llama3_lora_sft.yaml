@@ -1,0 +1,60 @@
+# model
+model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
+
+log_level: debug
+
+# method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+additional_target: embed_tokens,lm_head,norm
+
+# ddp
+ddp_find_unused_parameters: false
+ddp_timeout: 180000000
+
+# dataset
+dataset: rog_train_all_shuffled
+template: llama2_self
+cutoff_len: 4096
+max_samples: 130000
+#val_size: 0.1
+overwrite_cache: true
+preprocessing_num_workers: 1
+new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
+
+# output
+output_dir: /home/lx/models/sft/rog_240515
+logging_steps: 10
+save_steps: 500
+save_total_limit: 5
+plot_loss: true
+#overwrite_output_dir: true
+report_to: none
+
+# train
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 4
+learning_rate: 2e-5
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+weight_decay: 0.0
+warmup_ratio: 0.03
+#warmup_steps: 0.1
+fp16: true
+#bf16: true
+max_grad_norm: 1.0
+optim: adamw_torch
+use_fast_tokenizer: false
+resize_vocab: true
+split_special_tokens: true
+use_cache: false
+
+# eval
+#per_device_eval_batch_size: 1
+#evaluation_strategy: steps
+#eval_steps: 500

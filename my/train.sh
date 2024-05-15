@@ -1,5 +1,5 @@
-# nohup ./my/train.sh > mylog_240512.log 2>&1 &
-DATE=240512
+# nohup ./my/train.sh > mylog_240515.log 2>&1 &
+DATE=240515
 CUDA_VISIBLE_DEVICES=0 llamafactory-cli train \
     --stage sft \
     --do_train \
@@ -9,8 +9,8 @@ CUDA_VISIBLE_DEVICES=0 llamafactory-cli train \
     --lora_dropout 0.05 \
     --lora_target all \
     --template llama2_self \
-    --model_name_or_path /home/dyf/model/Llama-2-7b-chat-hf \
-    --output_dir /home/finetune/rog_${DATE} \
+    --model_name_or_path /home/lx/models/Llama-2-7b-chat-hf \
+    --output_dir /home/lx/models/sft/rog_${DATE} \
     --dataset_dir data \
     --dataset rog_train_all_shuffled \
     --cutoff_len 4096 \
@@ -35,7 +35,10 @@ CUDA_VISIBLE_DEVICES=0 llamafactory-cli train \
     --use_fast_tokenizer False \
     --resize_vocab True \
     --split_special_tokens True \
-    --use_cache False
+    --use_cache False \
+    --new_special_tokens "<PATH>, </PATH>, <SEP>, <PAD>"
+
+
 #    --packing True
 
 #    --upcast_layernorm True
