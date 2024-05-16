@@ -1,9 +1,5 @@
-
-
 # model
 model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
-
-log_level: debug
 
 # method
 stage: sft
@@ -13,6 +9,7 @@ lora_target: all
 lora_rank: 8
 lora_alpha: 16
 lora_dropout: 0.05
+new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
 additional_target: embed_tokens,lm_head,norm
 
 # ddp
@@ -26,10 +23,10 @@ max_samples: 130000
 #val_size: 0.1
 overwrite_cache: true
 preprocessing_num_workers: 1
-new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
 
 # output
-output_dir: /home/lx/models/sft/rog_240516
+log_level: debug
+output_dir: /home/lx/models/sft/rog_240517
 logging_steps: 20
 save_steps: 1000
 save_total_limit: 10
@@ -45,9 +42,9 @@ num_train_epochs: 3.0
 lr_scheduler_type: cosine
 weight_decay: 0.0
 warmup_ratio: 0.03
-#warmup_steps: 0.1
-fp16: true
-#bf16: true
+#warmup_steps: 0.1 # warmup_ratio has higher priority
+#fp16: true
+bf16: true
 max_grad_norm: 1.0
 optim: adamw_torch
 use_fast_tokenizer: false
