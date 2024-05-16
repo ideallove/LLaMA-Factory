@@ -14,7 +14,6 @@ lora_dropout: 0.05
 additional_target: embed_tokens,lm_head,norm
 
 # ddp
-ddp_find_unused_parameters: false
 ddp_timeout: 180000000
 
 # dataset
@@ -37,7 +36,7 @@ plot_loss: true
 report_to: none
 
 # train
-per_device_train_batch_size: 2
+per_device_train_batch_size: 1
 gradient_accumulation_steps: 8
 learning_rate: 0.00002
 num_train_epochs: 3.0
