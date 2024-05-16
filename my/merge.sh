@@ -1,9 +1,9 @@
 CUDA_VISIBLE_DEVICES=0 llamafactory-cli export \
-    --model_name_or_path /home/dyf/model/Llama-2-7b-chat-hf \
-    --adapter_name_or_path /home/finetune/rog_240514 \
+    --model_name_or_path /home/lx/models/Llama-2-7b-chat-hf \
+    --adapter_name_or_path /home/lx/models/sft/rog_240516 \
     --template llama2_self \
     --finetuning_type lora \
-    --export_dir /home/dyf/model/rog_240514 \
+    --export_dir /home/lx/models/rog_240516 \
     --export_size 10 \
     --export_device cuda \
     --export_legacy_format False \

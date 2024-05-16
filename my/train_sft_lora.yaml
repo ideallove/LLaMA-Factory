@@ -1,3 +1,5 @@
+
+
 # model
 model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
 
@@ -14,7 +16,6 @@ lora_dropout: 0.05
 additional_target: embed_tokens,lm_head,norm
 
 # ddp
-ddp_find_unused_parameters: true
 ddp_timeout: 180000000
 
 # dataset
@@ -28,7 +29,7 @@ preprocessing_num_workers: 1
 new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
 
 # output
-output_dir: /home/lx/models/sft/rog_240515
+output_dir: /home/lx/models/sft/rog_240516
 logging_steps: 20
 save_steps: 1000
 save_total_limit: 10

@@ -1,0 +1,21 @@
+# Note: DO NOT use quantized model or quantization_bit when merging lora adapters
+
+# CUDA_VISIBLE_DEVICES=1 llamafactory-cli export my/sft_lora_merge.yaml
+
+# model
+model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
+adapter_name_or_path: /home/lx/models/sft/rog_240516
+template: llama2_self
+finetuning_type: lora
+
+resize_vocab: true
+split_special_tokens: true
+use_fast_tokenizer: false
+print_param_status: true
+
+# export
+export_dir: home/lx/models/rog_240516
+export_size: 10
+export_device: cpu
+export_legacy_format: true
+
