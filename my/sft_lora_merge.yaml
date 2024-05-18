@@ -4,7 +4,7 @@
 
 # model
 model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
-adapter_name_or_path: /home/lx/models/sft/rog_240516
+adapter_name_or_path: /home/lx/models/sft/rog_240518
 template: llama2_self
 finetuning_type: lora
 
@@ -16,7 +16,7 @@ use_fast_tokenizer: false
 print_param_status: true
 
 # export
-export_dir: /home/lx/models/rog_240516_merged
+export_dir: /home/lx/models/rog_240517_merged
 export_size: 10
 export_device: cuda
 export_legacy_format: true
