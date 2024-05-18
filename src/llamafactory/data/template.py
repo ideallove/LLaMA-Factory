@@ -695,6 +695,12 @@ _register_template(
     default_system="You are a helpful assistant. 你是一个乐于助人的助手。",
 )
 
+_register_template(
+    name="llama2_self",
+    format_user=StringFormatter(slots=[{"bos_token"}, "[INST] {{content}} [/INST]"]),
+    format_system=StringFormatter(slots=["<<SYS>>\n{{content}}\n<</SYS>>\n\n"]),
+)
+
 
 _register_template(
     name="llama3",
