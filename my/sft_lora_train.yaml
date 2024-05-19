@@ -9,17 +9,18 @@ lora_target: all
 lora_rank: 8
 lora_alpha: 16
 lora_dropout: 0.05
-new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
-additional_target: embed_tokens,lm_head,norm
+#new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
+#additional_target: embed_tokens, lm_head, norm
 #flash_attn: fa2
+#use_unsloth: true
 
 # ddp
 ddp_timeout: 180000000
-deepspeed: my/ds_z3_config.json
+#deepspeed: my/ds_z3_config.json
 
 # dataset
 dataset: rog_train_all_shuffled
-template: llama3_self
+template: llama2_self
 cutoff_len: 4096
 max_samples: 130000
 #val_size: 0.1
@@ -28,7 +29,7 @@ preprocessing_num_workers: 1
 
 # output
 log_level: debug
-output_dir: /home/lx/models/sft/rog_240519
+output_dir: /home/lx/models/sft/rog_240520
 logging_steps: 20
 save_steps: 1000
 save_total_limit: 10
@@ -50,8 +51,8 @@ fp16: true
 max_grad_norm: 1.0
 optim: adamw_torch
 use_fast_tokenizer: false
-resize_vocab: true
-split_special_tokens: true
+split_special_tokens: false
+#resize_vocab: true
 use_cache: false
 
 # eval

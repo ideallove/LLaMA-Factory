@@ -728,6 +728,7 @@ _register_template(
     replace_eos=True,
 )
 
+
 _register_template(
     name="llama3_self",
     format_user=StringFormatter(
@@ -742,7 +743,7 @@ _register_template(
         slots=[{"bos_token"}, "<|start_header_id|>system<|end_header_id|>\n\n{{content}}<|eot_id|>"]
     ),
     stop_words=["<|eot_id|>"],
-    replace_eos=True,
+    # replace_eos=True,
 )
 
 
@@ -787,6 +788,18 @@ _register_template(
     format_observation=StringFormatter(slots=["<|function_output|>\n{{content}}<|end|>\n<|assistant|>\n"]),
     format_separator=EmptyFormatter(slots=["\n"]),
     default_system="You are a helpful AI assistant.",
+    stop_words=["<|end|>"],
+    replace_eos=True,
+)
+
+
+_register_template(
+    name="phi_self",
+    format_user=StringFormatter(slots=["<|user|>\n{{content}}<|end|>\n<|assistant|>\n"]),
+    format_system=StringFormatter(slots=[{"bos_token"}, "<|system|>\n{{content}}<|end|>\n"]),
+    # format_observation=StringFormatter(slots=["<|function_output|>\n{{content}}<|end|>\n<|assistant|>\n"]),
+    # format_separator=EmptyFormatter(slots=["\n"]),
+    # default_system="You are a helpful AI assistant.",
     stop_words=["<|end|>"],
     replace_eos=True,
 )
