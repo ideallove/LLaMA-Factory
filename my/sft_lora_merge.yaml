@@ -3,9 +3,9 @@
 # CUDA_VISIBLE_DEVICES=1 llamafactory-cli export ./my/sft_lora_merge.yaml
 
 # model
-model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
-adapter_name_or_path: /home/lx/models/sft/rog_240518
-template: llama2_self
+model_name_or_path: /home/lx/models/Meta-Llama-3-8B-Instruct
+adapter_name_or_path: /home/lx/models/sft/rog_240519
+template: llama3_self
 finetuning_type: lora
 
 additional_target: embed_tokens,lm_head,norm
@@ -16,7 +16,7 @@ use_fast_tokenizer: false
 print_param_status: true
 
 # export
-export_dir: /home/lx/models/rog_240517_merged
+export_dir: /home/lx/models/rog_240519_merged
 export_size: 10
 export_device: cuda
 export_legacy_format: true

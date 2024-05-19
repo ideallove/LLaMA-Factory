@@ -728,6 +728,23 @@ _register_template(
     replace_eos=True,
 )
 
+_register_template(
+    name="llama3_self",
+    format_user=StringFormatter(
+        slots=[
+            (
+                "<|start_header_id|>user<|end_header_id|>\n\n{{content}}<|eot_id|>"
+                "<|start_header_id|>assistant<|end_header_id|>\n\n"
+            )
+        ]
+    ),
+    format_system=StringFormatter(
+        slots=[{"bos_token"}, "<|start_header_id|>system<|end_header_id|>\n\n{{content}}<|eot_id|>"]
+    ),
+    stop_words=["<|eot_id|>"],
+    replace_eos=True,
+)
+
 
 _register_template(
     name="mistral",
