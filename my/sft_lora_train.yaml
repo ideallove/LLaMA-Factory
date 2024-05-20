@@ -28,7 +28,7 @@ overwrite_cache: true
 preprocessing_num_workers: 1
 
 # output
-log_level: debug
+#log_level: debug
 output_dir: /home/lx/models/sft/rog_240520
 logging_steps: 20
 save_steps: 1000
