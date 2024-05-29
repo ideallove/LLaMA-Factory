@@ -5,19 +5,20 @@
 
 # model
 model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
-adapter_name_or_path: /home/lx/models/sft/rog_240525
+adapter_name_or_path: /home/lx/models/sft/rog_240529
 template: llama2_self
 finetuning_type: lora
 
 additional_target: embed_tokens,lm_head,norm
-new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
+#new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
 resize_vocab: true
 split_special_tokens: false
 use_fast_tokenizer: false
+#use_cache: false
 print_param_status: true
 
 # export
-export_dir: /home/lx/models/rog_240525_merged
+export_dir: /home/lx/models/rog_240529_merged
 export_size: 10
 export_device: cuda
 export_legacy_format: false
