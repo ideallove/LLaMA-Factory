@@ -1,9 +1,10 @@
 # 启动指令
 # CUDA_VISIBLE_DEVICES=0,1 llamafactory-cli train ./my/sft_lora_train.yaml
+# CUDA_VISIBLE_DEVICES=0 llamafactory-cli train ./my/sft_lora_train.yaml
 
 # model
 model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
-output_dir: /home/lx/models/sft/rog_240530
+output_dir: /home/lx/models/sft/rog_240531
 run_name: rog_240530
 
 # method
