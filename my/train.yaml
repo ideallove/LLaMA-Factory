@@ -1,11 +1,14 @@
 # 启动指令
-# CUDA_VISIBLE_DEVICES=0,1 llamafactory-cli train ./my/train.yaml
-# CUDA_VISIBLE_DEVICES=0 llamafactory-cli train ./my/train.yaml
+# OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0,1 llamafactory-cli train ./my/train.yaml
+# OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0 llamafactory-cli train ./my/train.yaml
 
-# model
-model_name_or_path: /home/lx/models/Llama-2-7b-chat-hf
-output_dir: /home/lx/models/sft/lmgr_240604
-run_name: lmgr_240604
+# user-defined
+model_name_or_path: /home/lx/models/Mistral-7B-Instruct-v0.3
+output_dir: /home/lx/models/sft/rog_mistral_240609
+run_name: rog_mistral_240609
+template: mistral
+dataset: rog_train_shuffled_new
+cutoff_len: 4096
 
 # method
 stage: sft
@@ -22,12 +25,10 @@ additional_target: embed_tokens, lm_head, norm
 
 # ddp
 ddp_timeout: 180000000
+ddp_find_unused_parameters: false
 #deepspeed: my/ds_z3_config.json
 
 # dataset
-dataset: rog_train_all_shuffled
-template: llama2_self
-cutoff_len: 2048
 max_samples: 130000
 #val_size: 0.1
 overwrite_cache: true
@@ -35,16 +36,16 @@ preprocessing_num_workers: 1
 
 # output
 log_level: debug
-logging_steps: 20
+logging_steps: 10
 save_steps: 1000
 save_total_limit: 10
 plot_loss: true
 #overwrite_output_dir: true
-report_to: wandb
+report_to: none
 
 # train
 per_device_train_batch_size: 1
-gradient_accumulation_steps: 10
+gradient_accumulation_steps: 8
 learning_rate: 0.00002
 num_train_epochs: 3.0
 lr_scheduler_type: cosine
@@ -55,10 +56,10 @@ warmup_ratio: 0.03
 bf16: true
 max_grad_norm: 1.0
 optim: adamw_torch
-use_fast_tokenizer: false
-split_special_tokens: false
-resize_vocab: true
-use_cache: false
+#use_fast_tokenizer: false
+#split_special_tokens: false
+#resize_vocab: true
+#use_cache: false
 
 # eval
 #per_device_eval_batch_size: 1

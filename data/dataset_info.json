@@ -1,4 +1,12 @@
 {
+  "rog_train_shuffled_new": {
+    "file_name": "/home/lx/datasets/rog_train_shuffled_new.json",
+    "formatting": "alpaca",
+    "columns": {
+      "prompt": "instruction",
+      "response": "output"
+    }
+  },
   "rog_train_all_shuffled": {
     "file_name": "/home/lx/datasets/rog_train_shuffled.json",
     "formatting": "alpaca",
