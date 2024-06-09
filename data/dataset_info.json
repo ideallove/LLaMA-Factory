@@ -4,10 +4,13 @@
     "formatting": "alpaca",
     "columns": {
       "prompt": "instruction",
-      "response": "output"
+      "query": "input",
+      "response": "output",
+      "system": "system",
+      "history": "history"
     }
   },
-  "rog_train_all_shuffled": {
+  "rog_train_shuffled": {
     "file_name": "/home/lx/datasets/rog_train_shuffled.json",
     "formatting": "alpaca",
     "columns": {
