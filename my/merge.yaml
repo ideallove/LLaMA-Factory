@@ -4,14 +4,14 @@
 # Llama-2-7b-chat-hf
 
 # model
-model_name_or_path: /home/lx/models/Mistral-7B-Instruct-v0.3
-adapter_name_or_path: /home/lx/models/sft/rog_mistral_240609
-export_dir: /home/lx/models/rog_mistral_240609_merged
-template: mistral
+model_name_or_path: /home/lx/models/Meta-Llama-3-8B-Instruct
+adapter_name_or_path: /home/lx/models/sft/rog_llama3_240611
+export_dir: /home/lx/models/rog_llama3_240611_merged
+template: llama3_self
 
 finetuning_type: lora
 
-additional_target: embed_tokens,lm_head,norm
+#additional_target: embed_tokens,lm_head,norm
 #new_special_tokens: "<PATH>, </PATH>, <SEP>, <PAD>"
 #resize_vocab: true
 #split_special_tokens: false

@@ -748,10 +748,45 @@ _register_template(
 
 
 _register_template(
+    name="llama3_self",
+    format_user=StringFormatter(
+        slots=[
+            (
+                "<|start_header_id|>user<|end_header_id|>\n\n{{content}}<|eot_id|>"
+                "<|start_header_id|>assistant<|end_header_id|>\n\n"
+            )
+        ]
+    ),
+    format_system=StringFormatter(
+        slots=[{"bos_token"}, "<|start_header_id|>system<|end_header_id|>\n\n{{content}}<|eot_id|>"]
+    ),
+    format_observation=StringFormatter(
+        slots=[
+            (
+                "<|start_header_id|>tool<|end_header_id|>\n\n{{content}}<|eot_id|>"
+                "<|start_header_id|>assistant<|end_header_id|>\n\n"
+            )
+        ]
+    ),
+    # default_system="You are a helpful assistant.",
+    stop_words=["<|eot_id|>"],
+    replace_eos=True,
+)
+
+
+_register_template(
     name="mistral",
     format_user=StringFormatter(slots=["[INST] {{content}} [/INST]"]),
     format_system=StringFormatter(slots=[{"bos_token"}, "{{content}}"]),
     force_system=True,
+)
+
+
+_register_template(
+    name="mistral_self",
+    format_user=StringFormatter(slots=["[INST] {{content}} [/INST]"]),
+    # format_system=StringFormatter(slots=[{"bos_token"}, "{{content}}"]),
+    # force_system=True,
 )
 
 
@@ -814,6 +849,18 @@ _register_template(
     format_observation=StringFormatter(slots=["<|im_start|>tool\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
     format_separator=EmptyFormatter(slots=["\n"]),
     default_system="You are a helpful assistant.",
+    stop_words=["<|im_end|>"],
+    replace_eos=True,
+)
+
+
+_register_template(
+    name="qwen_self",
+    format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
+    format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
+    format_observation=StringFormatter(slots=["<|im_start|>tool\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
+    format_separator=EmptyFormatter(slots=["\n"]),
+    # default_system="You are a helpful assistant.",
     stop_words=["<|im_end|>"],
     replace_eos=True,
 )
