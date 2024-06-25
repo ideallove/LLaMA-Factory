@@ -1,5 +1,20 @@
+# Copyright 2024 the LlamaFactory team.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from typing import TYPE_CHECKING, Any, Dict, Optional, TypedDict
 
+import torch
 from transformers import AutoConfig, AutoModelForCausalLM, AutoModelForVision2Seq, AutoProcessor, AutoTokenizer
 from trl import AutoModelForCausalLMWithValueHead
 
@@ -161,6 +176,10 @@ def load_model(
 
     if not is_trainable:
         model.requires_grad_(False)
+        for param in model.parameters():
+            if param.data.dtype == torch.float32 and model_args.compute_dtype != torch.float32:
+                param.data = param.data.to(model_args.compute_dtype)
+
         model.eval()
     else:
         model.train()

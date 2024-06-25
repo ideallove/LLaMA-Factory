@@ -1,3 +1,17 @@
+# Copyright 2024 the LlamaFactory team.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from typing import TYPE_CHECKING, Dict
 
 from ...data import TEMPLATES
@@ -35,10 +49,14 @@ def create_top() -> Dict[str, "Component"]:
             booster = gr.Radio(choices=["none", "flashattn2", "unsloth"], value="none", scale=3)
             visual_inputs = gr.Checkbox(scale=1)
 
-    model_name.change(get_model_info, [model_name], [model_path, template, visual_inputs], queue=False)
+    model_name.change(get_model_info, [model_name], [model_path, template, visual_inputs], queue=False).then(
+        list_checkpoints, [model_name, finetuning_type], [checkpoint_path], queue=False
+    )
     model_name.input(save_config, inputs=[lang, model_name], queue=False)
     model_path.input(save_config, inputs=[lang, model_name, model_path], queue=False)
-    finetuning_type.change(can_quantize, [finetuning_type], [quantization_bit], queue=False)
+    finetuning_type.change(can_quantize, [finetuning_type], [quantization_bit], queue=False).then(
+        list_checkpoints, [model_name, finetuning_type], [checkpoint_path], queue=False
+    )
     checkpoint_path.focus(list_checkpoints, [model_name, finetuning_type], [checkpoint_path], queue=False)
 
     return dict(

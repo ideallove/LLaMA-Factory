@@ -1,3 +1,17 @@
+# Copyright 2024 the LlamaFactory team.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import json
 import os
 import signal
@@ -19,16 +33,16 @@ if is_gradio_available():
     import gradio as gr
 
 
-def abort_leaf_process(pid: int) -> None:
+def abort_process(pid: int) -> None:
     r"""
-    Aborts the leaf processes.
+    Aborts the processes recursively in a bottom-up way.
     """
     children = psutil.Process(pid).children()
     if children:
         for child in children:
-            abort_leaf_process(child.pid)
-    else:
-        os.kill(pid, signal.SIGABRT)
+            abort_process(child.pid)
+
+    os.kill(pid, signal.SIGABRT)
 
 
 def can_quantize(finetuning_type: str) -> "gr.Dropdown":
