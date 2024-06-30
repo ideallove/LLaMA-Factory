@@ -761,7 +761,7 @@ _register_template(
             )
         ]
     ),
-    # default_system="You are a helpful assistant.",
+    default_system="You are a helpful Knowledge Graph assistant.",
     stop_words=["<|eot_id|>"],
     replace_eos=True,
 )

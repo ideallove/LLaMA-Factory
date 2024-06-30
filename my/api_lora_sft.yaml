@@ -1,0 +1,6 @@
+# CUDA_VISIBLE_DEVICES=1 API_PORT=8000 llamafactory-cli api my/api_lora_sft.yaml
+
+model_name_or_path: /home/lx/models/Meta-Llama-3-8B-Instruct
+adapter_name_or_path: /home/lx/models/sft/rog_llama3_240611
+template: llama3_self
+finetuning_type: lora
