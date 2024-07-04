@@ -78,6 +78,19 @@ TRAINING_STAGES = {
 
 STAGES_USE_PAIR_DATA = {"rm", "dpo"}
 
+SUPPORTED_CLASS_FOR_BLOCK_DIAG_ATTN = {
+    "cohere",
+    "falcon",
+    "gemma",
+    "gemma2",
+    "llama",
+    "mistral",
+    "phi",
+    "phi3",
+    "qwen2",
+    "starcoder2",
+}
+
 SUPPORTED_CLASS_FOR_S2ATTN = {"llama"}
 
 V_HEAD_WEIGHTS_NAME = "value_head.bin"
@@ -509,15 +522,19 @@ register_model_group(
         },
         "Gemma-2-9B": {
             DownloadSource.DEFAULT: "google/gemma-2-9b",
+            DownloadSource.MODELSCOPE: "LLM-Research/gemma-2-9b",
         },
         "Gemma-2-27B": {
             DownloadSource.DEFAULT: "google/gemma-2-27b",
+            DownloadSource.MODELSCOPE: "LLM-Research/gemma-2-27b",
         },
         "Gemma-2-9B-Chat": {
             DownloadSource.DEFAULT: "google/gemma-2-9b-it",
+            DownloadSource.MODELSCOPE: "LLM-Research/gemma-2-9b-it",
         },
         "Gemma-2-27B-Chat": {
             DownloadSource.DEFAULT: "google/gemma-2-27b-it",
+            DownloadSource.MODELSCOPE: "LLM-Research/gemma-2-27b-it",
         },
     },
     template="gemma",
