@@ -2,19 +2,21 @@
 # llamafactory-cli train ./my/train.yaml
 # OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0,1 llamafactory-cli train ./my/train.yaml
 # OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0 llamafactory-cli train ./my/train.yaml
+
 # pip install -e '.[torch,metrics]'
+
 # Meta-Llama-3-8B-Instruct
 # Mistral-7B-Instruct-v0.3
 # Qwen2-7B-Instruct
 
 # user-defined
 model_name_or_path: /home/lx/models/Meta-Llama-3-8B-Instruct
-output_dir: /home/lx/models/sft/rog_llama3_240613
-run_name: rog_llama3_240613
-template: llama3_self
+output_dir: /home/lx/models/sft/rog_llama3_240704
+run_name: rog_llama3_240704
+template: llama3
 dataset: rog_train_shuffled_new
-cutoff_len: 1536
-max_samples: 150000
+cutoff_len: 1568
+max_samples: 269000
 
 # method
 stage: sft
@@ -39,9 +41,9 @@ overwrite_cache: true
 preprocessing_num_workers: 1
 
 # output
-log_level: debug
+#log_level: debug
 logging_steps: 10
-save_steps: 500
+save_steps: 1000
 save_total_limit: 10
 plot_loss: true
 #overwrite_output_dir: true
@@ -49,7 +51,7 @@ report_to: none
 
 # train
 per_device_train_batch_size: 2
-gradient_accumulation_steps: 8
+gradient_accumulation_steps: 12
 learning_rate: 2.0e-5
 num_train_epochs: 3.0
 lr_scheduler_type: cosine
