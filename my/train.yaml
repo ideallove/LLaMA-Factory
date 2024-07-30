@@ -1,7 +1,7 @@
 # 启动指令
 # llamafactory-cli train ./my/train.yaml
 # OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0,1 llamafactory-cli train ./my/train.yaml
-# OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=0 llamafactory-cli train ./my/train.yaml
+# OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=1 llamafactory-cli train ./my/train.yaml
 
 # pip install -e '.[torch,metrics]'
 
@@ -11,8 +11,8 @@
 
 # user-defined
 model_name_or_path: /home/lx/models/Meta-Llama-3-8B-Instruct
-output_dir: /home/lx/models/sft/rog_llama3_240704
-run_name: rog_llama3_240704
+output_dir: /home/lx/models/sft/rog_llama3_240705
+run_name: rog_llama3_240705
 template: llama3
 dataset: rog_train_shuffled_new
 cutoff_len: 1568
