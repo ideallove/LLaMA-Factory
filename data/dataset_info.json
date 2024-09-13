@@ -1,4 +1,37 @@
 {
+  "rog_med_train": {
+    "file_name": "/home/lx/datasets/rog_med_train.json",
+    "formatting": "alpaca",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system",
+      "history": "history"
+    }
+  },
+  "rog_train_shuffled_new": {
+    "file_name": "/home/lx/datasets/rog_train_shuffled_new.json",
+    "formatting": "alpaca",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system",
+      "history": "history"
+    }
+  },
+  "rog_train_shuffled": {
+    "file_name": "/home/lx/datasets/rog_train_shuffled.json",
+    "formatting": "alpaca",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system",
+      "history": "history"
+    }
+  },
   "identity": {
     "file_name": "identity.json"
   },

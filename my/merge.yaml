@@ -1,0 +1,16 @@
+### Note: DO NOT use quantized model or quantization_bit when merging lora adapters
+
+# llamafactory-cli export ./my/merge.yaml
+# Meta-Llama-3.1-8B-Instruct
+
+### model
+model_name_or_path: /home/lx/models/Meta-Llama-3.1-8B-Instruct
+adapter_name_or_path: /home/lx/models/sft/rog_med_llama3.1_240910
+template: llama3
+finetuning_type: lora
+
+### export
+export_dir: /home/lx/models/rog_med_llama3.1_240910_merged
+export_size: 5
+export_device: cuda
+export_legacy_format: false
