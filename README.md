@@ -175,7 +175,7 @@ Compared to ChatGLM's [P-Tuning](https://github.com/THUDM/ChatGLM2-6B/tree/main/
 | [Llama 2](https://huggingface.co/meta-llama)                      | 7B/13B/70B                       | llama2    |
 | [Llama 3/Llama 3.1](https://huggingface.co/meta-llama)            | 8B/70B                           | llama3    |
 | [LLaVA-1.5](https://huggingface.co/llava-hf)                      | 7B/13B                           | llava     |
-| [MiniCPM](https://huggingface.co/openbmb)                         | 1B/2B                            | cpm       |
+| [MiniCPM](https://huggingface.co/openbmb)                         | 1B/2B/4B                         | cpm/cpm3  |
 | [Mistral/Mixtral](https://huggingface.co/mistralai)               | 7B/8x7B/8x22B                    | mistral   |
 | [OLMo](https://huggingface.co/allenai)                            | 1B/7B                            | -         |
 | [PaliGemma](https://huggingface.co/google)                        | 3B                               | paligemma |
@@ -185,7 +185,7 @@ Compared to ChatGLM's [P-Tuning](https://github.com/THUDM/ChatGLM2-6B/tree/main/
 | [Qwen2-VL](https://huggingface.co/Qwen)                           | 2B/7B                            | qwen2_vl  |
 | [StarCoder 2](https://huggingface.co/bigcode)                     | 3B/7B/15B                        | -         |
 | [XVERSE](https://huggingface.co/xverse)                           | 7B/13B/65B                       | xverse    |
-| [Yi/Yi-1.5](https://huggingface.co/01-ai)                         | 6B/9B/34B                        | yi        |
+| [Yi/Yi-1.5 (Code)](https://huggingface.co/01-ai)                  | 1.5B/6B/9B/34B                   | yi        |
 | [Yi-VL](https://huggingface.co/01-ai)                             | 6B/34B                           | yi_vl     |
 | [Yuan 2](https://huggingface.co/IEITYuan)                         | 2B/51B/102B                      | yuan      |
 
@@ -275,7 +275,7 @@ You also can add a custom chat template to [template.py](src/llamafactory/data/t
 - [Magpie-Pro-300K-Filtered (en)](https://huggingface.co/datasets/Magpie-Align/Magpie-Pro-300K-Filtered)
 - [Magpie-ultra-v0.1 (en)](https://huggingface.co/datasets/argilla/magpie-ultra-v0.1)
 - [LLaVA mixed (en&zh)](https://huggingface.co/datasets/BUAADreamer/llava-en-zh-300k)
-- [Pokemon-gpt4o-captions](https://huggingface.co/datasets/jugg1024/pokemon-gpt4o-captions)
+- [Pokemon-gpt4o-captions (en&zh)](https://huggingface.co/datasets/jugg1024/pokemon-gpt4o-captions)
 - [Open Assistant (de)](https://huggingface.co/datasets/mayflowergmbh/oasst_de)
 - [Dolly 15k (de)](https://huggingface.co/datasets/mayflowergmbh/dolly-15k_de)
 - [Alpaca GPT4 (de)](https://huggingface.co/datasets/mayflowergmbh/alpaca-gpt4_de)
