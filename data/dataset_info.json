@@ -1,4 +1,7 @@
 {
+  "my_training_set": {
+    "file_name": "/home/lx/data_kgqa/llm_train_set/merged/training_set.json"
+  },
   "identity": {
     "file_name": "identity.json"
   },
