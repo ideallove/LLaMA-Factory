@@ -79,6 +79,10 @@ class SGLangEngine(BaseEngine):
         self.template = get_template_and_fix_tokenizer(self.tokenizer, data_args)
         self.template.mm_plugin.expand_mm_tokens = False  # for sglang generate
         self.generating_args = generating_args.to_dict()
+        if model_args.adapter_name_or_path is not None:
+            self.lora_request = True
+        else:
+            self.lora_request = False
 
         launch_cmd = [
             "python3 -m sglang.launch_server",
@@ -90,6 +94,15 @@ class SGLangEngine(BaseEngine):
             f"--download-dir {model_args.cache_dir}",
             "--log-level error",
         ]
+        if self.lora_request:
+            launch_cmd.extend(
+                [
+                    "--max-loras-per-batch 1",
+                    f"--lora-backend {model_args.sglang_lora_backend}",
+                    f"--lora-paths lora0={model_args.adapter_name_or_path[0]}",
+                    "--disable-radix-cache",
+                ]
+            )
         launch_cmd = " ".join(launch_cmd)
         logger.info_rank0(f"Starting SGLang server with command: {launch_cmd}")
         try:
@@ -148,7 +161,9 @@ class SGLangEngine(BaseEngine):
         )
         paired_messages = messages + [{"role": "assistant", "content": ""}]
         system = system or self.generating_args["default_system"]
-        prompt_ids, _ = self.template.encode_oneturn(self.tokenizer, paired_messages, system, tools)
+        enable_thinking = input_kwargs.pop("enable_thinking", None)
+        enable_thinking = enable_thinking if enable_thinking is not None else self.generating_args["enable_thinking"]
+        prompt_ids, _ = self.template.encode_oneturn(self.tokenizer, paired_messages, system, tools, enable_thinking)
         prompt_length = len(prompt_ids)
 
         temperature: Optional[float] = input_kwargs.pop("temperature", None)
@@ -200,6 +215,8 @@ class SGLangEngine(BaseEngine):
                 "sampling_params": sampling_params,
                 "stream": True,
             }
+            if self.lora_request:
+                json_data["lora_request"] = ["lora0"]
             response = requests.post(f"{self.base_url}/generate", json=json_data, stream=True)
             if response.status_code != 200:
                 raise RuntimeError(f"SGLang server error: {response.status_code}, {response.text}")
